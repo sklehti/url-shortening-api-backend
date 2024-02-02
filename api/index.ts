@@ -12,30 +12,18 @@ app.use(
 
 const PORT = 3001;
 
-/* app.get('/dog',(req,res)=>{
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3001');
-    ...
-    }) */
-
-app.get("/ping", (_req, res) => {
-  console.log("someone pinged here");
-  res.send("pong");
-});
-
 // eslint-disable-next-line
-app.get("/test", async (_req, res) => {
-  //console.log(req, " ja ");
-
+app.post("/links", async (req, res) => {
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   const response = await axios.post(
     "https://cleanuri.com/api/v1/shorten",
-    `url=https://cleanuri.com/api/v1/shorten`,
+    `url=${req.body.longUrl}`,
     {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     }
   );
-  console.log(response);
 
   res.send(response.data);
 });
@@ -43,3 +31,5 @@ app.get("/test", async (_req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;

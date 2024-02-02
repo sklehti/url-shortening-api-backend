@@ -17,31 +17,21 @@ const cors_1 = __importDefault(require("cors"));
 const axios_1 = __importDefault(require("axios"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use(
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-(0, cors_1.default)({
-    origin: "http://localhost:3001",
+app.use((0, cors_1.default)({
+    origin: "*",
 }));
 const PORT = 3001;
-/* app.get('/dog',(req,res)=>{
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3001');
-    ...
-    }) */
-app.get("/ping", (_req, res) => {
-    console.log("someone pinged here");
-    res.send("pong");
-});
 // eslint-disable-next-line
-app.get("/test", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //console.log(req, " ja ");
-    const response = yield axios_1.default.post("https://cleanuri.com/api/v1/shorten", `url=https://cleanuri.com/api/v1/shorten`, {
+app.post("/links", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    const response = yield axios_1.default.post("https://cleanuri.com/api/v1/shorten", `url=${req.body.longUrl}`, {
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
     });
-    console.log(response);
     res.send(response.data);
 }));
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+module.exports = app;

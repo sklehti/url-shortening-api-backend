@@ -12,7 +12,7 @@ app.use(
 
 const PORT = 3001;
 
-app.get("https://url-shortening-api-backend-dgzeabbwx-sklehti.vercel.app/", (_req, res) => {
+app.get("/", (_req, res) => {
   res.send("frontend repository can be found at: https://github.com/sklehti/url-shortening-api-master");
 });
 

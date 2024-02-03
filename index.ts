@@ -12,6 +12,10 @@ app.use(
 
 const PORT = 3001;
 
+app.get("/", (_req, res) => {
+  res.send("frontend repository can be found at: https://github.com/sklehti/url-shortening-api-master");
+});
+
 // eslint-disable-next-line
 app.post("/links", async (req, res) => {
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");

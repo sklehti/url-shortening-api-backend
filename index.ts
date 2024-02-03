@@ -13,7 +13,9 @@ app.use(
 const PORT = 3001;
 
 app.get("/", (_req, res) => {
-  res.send("frontend repository can be found at: https://github.com/sklehti/url-shortening-api-master");
+  res.send(
+    "Frontend repository can be found at: https://github.com/sklehti/url-shortening-api-master"
+  );
 });
 
 // eslint-disable-next-line

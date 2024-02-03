@@ -21,6 +21,9 @@ app.use((0, cors_1.default)({
     origin: "*",
 }));
 const PORT = 3001;
+app.get("/", (_req, res) => {
+    res.send("frontend repository can be found at: https://github.com/sklehti/url-shortening-api-master");
+});
 // eslint-disable-next-line
 app.post("/links", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
